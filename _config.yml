@@ -1,0 +1,12 @@
+title: Jobdone Ai Observation
+description: 白話科技觀察
+lang: zh-Hant
+url: https://jobdone-cc.github.io
+baseurl: /blog
+timezone: Asia/Taipei
+# Posts are dated in Taiwan time; without this a post written late in the evening can be skipped by a build running on UTC.
+future: true
+permalink: /:year/:month/:day/:title:output_ext
+theme: minima
+plugins:
+  - jekyll-feed
