@@ -2,23 +2,22 @@
 layout: default
 ---
 {%- comment -%}
-  minima's home layout in Chinese, showing each post's summary (written by the publisher into the front matter).
+  Home page: the latest 7 days that have posts, one heading per day (matching the daily email),
+  each post with its summary (written by the publisher into the front matter). Older posts are on /archive/.
 {%- endcomment -%}
 <div class="home">
   {{ content }}
-  {%- if site.posts.size > 0 -%}
-    <h2 class="post-list-heading">{{ page.list_title | default: "文章" }}</h2>
+  {%- assign days = site.posts | group_by_exp: "post", "post.date | date: '%Y-%m-%d'" -%}
+  {%- for day in days limit: 7 -%}
+    <h2 class="post-list-heading">{{ day.name }}</h2>
     <ul class="post-list">
-      {%- for post in site.posts -%}
+      {%- for post in day.items -%}
       <li>
-        <span class="post-meta">{{ post.date | date: site.minima.date_format }}</span>
-        <h3>
-          <a class="post-link" href="{{ post.url | relative_url }}">{{ post.title | escape }}</a>
-        </h3>
+        <h3><a class="post-link" href="{{ post.url | relative_url }}">{{ post.title | escape }}</a></h3>
         {%- if post.summary -%}<p>{{ post.summary | escape }}</p>{%- endif -%}
       </li>
       {%- endfor -%}
     </ul>
-    <p class="rss-subscribe">用 <a href="{{ "/feed.xml" | relative_url }}">RSS</a> 訂閱</p>
-  {%- endif -%}
+  {%- endfor -%}
+  <p><a href="{{ "/archive/" | relative_url }}">所有文章</a> · 用 <a href="{{ "/feed.xml" | relative_url }}">RSS</a> 訂閱</p>
 </div>

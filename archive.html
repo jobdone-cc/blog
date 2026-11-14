@@ -1,0 +1,14 @@
+---
+layout: page
+title: 所有文章
+permalink: /archive/
+---
+{%- assign months = site.posts | group_by_exp: "post", "post.date | date: '%Y 年 %-m 月'" -%}
+{%- for month in months -%}
+<h2>{{ month.name }}</h2>
+<ul>
+  {%- for post in month.items -%}
+  <li><span class="post-meta">{{ post.date | date: "%m-%d" }}</span> <a href="{{ post.url | relative_url }}">{{ post.title | escape }}</a></li>
+  {%- endfor -%}
+</ul>
+{%- endfor -%}
