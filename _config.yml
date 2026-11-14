@@ -8,5 +8,7 @@ timezone: Asia/Taipei
 future: true
 permalink: /:year/:month/:day/:title:output_ext
 theme: minima
+minima:
+  date_format: "%Y-%m-%d"
 plugins:
   - jekyll-feed

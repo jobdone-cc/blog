@@ -1,0 +1,24 @@
+---
+layout: default
+---
+{%- comment -%}
+  minima's home layout in Chinese, showing each post's summary (written by the publisher into the front matter).
+{%- endcomment -%}
+<div class="home">
+  {{ content }}
+  {%- if site.posts.size > 0 -%}
+    <h2 class="post-list-heading">{{ page.list_title | default: "文章" }}</h2>
+    <ul class="post-list">
+      {%- for post in site.posts -%}
+      <li>
+        <span class="post-meta">{{ post.date | date: site.minima.date_format }}</span>
+        <h3>
+          <a class="post-link" href="{{ post.url | relative_url }}">{{ post.title | escape }}</a>
+        </h3>
+        {%- if post.summary -%}<p>{{ post.summary | escape }}</p>{%- endif -%}
+      </li>
+      {%- endfor -%}
+    </ul>
+    <p class="rss-subscribe">用 <a href="{{ "/feed.xml" | relative_url }}">RSS</a> 訂閱</p>
+  {%- endif -%}
+</div>
